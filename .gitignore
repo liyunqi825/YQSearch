@@ -1,0 +1,3 @@
+#忽略build 和derivedData文件
+Build/*
+DerivedData/*

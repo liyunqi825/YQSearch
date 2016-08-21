@@ -17,6 +17,7 @@
     YWSearchTitleModel *newModel;
     YWSearchTitleModel *findModel;
     NSString *searchCount;
+    
 }
 PROPERTY_STRONG UITableView *mtableView;
 PROPERTY_STRONG NSMutableArray *list;
