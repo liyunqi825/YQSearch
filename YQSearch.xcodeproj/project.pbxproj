@@ -40,6 +40,7 @@
 		924C867A1D62B673004A697F /* MSBaseModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 924C86791D62B673004A697F /* MSBaseModelObject.m */; };
 		924C867D1D62B902004A697F /* NSString+dataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 924C867C1D62B902004A697F /* NSString+dataAdditions.m */; };
 		924C86801D62B917004A697F /* NSMutableAttributedString+SYFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 924C867F1D62B917004A697F /* NSMutableAttributedString+SYFont.m */; };
+		925B5B601D6A9163009AF941 /* YWWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 925B5B5F1D6A9163009AF941 /* YWWebController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +129,8 @@
 		924C867C1D62B902004A697F /* NSString+dataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+dataAdditions.m"; sourceTree = "<group>"; };
 		924C867E1D62B917004A697F /* NSMutableAttributedString+SYFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+SYFont.h"; sourceTree = "<group>"; };
 		924C867F1D62B917004A697F /* NSMutableAttributedString+SYFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+SYFont.m"; sourceTree = "<group>"; };
+		925B5B5E1D6A9163009AF941 /* YWWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YWWebController.h; sourceTree = "<group>"; };
+		925B5B5F1D6A9163009AF941 /* YWWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YWWebController.m; sourceTree = "<group>"; };
 		FD43B612BE1A7C0BC55088CD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -290,6 +293,7 @@
 		26F8CEDD1D5F0A4000DAECBE /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				925B5B5D1D6A914A009AF941 /* webController */,
 				26F8CEE31D5F0A9100DAECBE /* navController */,
 				26F8CEDF1D5F0A6100DAECBE /* searchcontroller */,
 				26F8CEDE1D5F0A5300DAECBE /* maincontroller */,
@@ -366,6 +370,15 @@
 				26FAB2251D60AFED00F33709 /* UIView+Extension.m */,
 			);
 			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		925B5B5D1D6A914A009AF941 /* webController */ = {
+			isa = PBXGroup;
+			children = (
+				925B5B5E1D6A9163009AF941 /* YWWebController.h */,
+				925B5B5F1D6A9163009AF941 /* YWWebController.m */,
+			);
+			path = webController;
 			sourceTree = "<group>";
 		};
 		E7D8205BA4F353884C8DA547 /* Frameworks */ = {
@@ -561,6 +574,7 @@
 				26F8CEEF1D5F152800DAECBE /* YWSubHttp.m in Sources */,
 				26FA9AFD1D602B9500F33709 /* YWSearchModel.m in Sources */,
 				26F8CEDB1D5F094A00DAECBE /* YWBaseController.m in Sources */,
+				925B5B601D6A9163009AF941 /* YWWebController.m in Sources */,
 				924C867D1D62B902004A697F /* NSString+dataAdditions.m in Sources */,
 				26F8CEF21D5F155100DAECBE /* YWBaseModel.m in Sources */,
 				26FA9B061D6095AC00F33709 /* YWSearchCell.m in Sources */,
@@ -721,8 +735,8 @@
 			baseConfigurationReference = 4CCDFCB690F4F2CF1C8CF6F2 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xuesong liu (6Z4DZ53FR3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xuesong liu (6Z4DZ53FR3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 彪 兰 (AZHYC4MK63)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 彪 兰 (AZHYC4MK63)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/config/PrefixHeader.pch";
 				INFOPLIST_FILE = YQSearch/Info.plist;
@@ -735,7 +749,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = UopsClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00823435-e29e-43c8-a769-2b67ca04942d";
+				PROVISIONING_PROFILE = "58ef2cb9-9fb0-4ce0-96f4-d665d6ec0171";
 			};
 			name = Debug;
 		};
@@ -744,7 +758,7 @@
 			baseConfigurationReference = 58AAA71B7415C25AA21D25BD /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xuesong liu (6Z4DZ53FR3)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: 彪 兰 (AZHYC4MK63)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/config/PrefixHeader.pch";
 				INFOPLIST_FILE = YQSearch/Info.plist;
@@ -757,7 +771,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = UopsClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00823435-e29e-43c8-a769-2b67ca04942d";
+				PROVISIONING_PROFILE = "58ef2cb9-9fb0-4ce0-96f4-d665d6ec0171";
 			};
 			name = Release;
 		};

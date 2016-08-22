@@ -12,12 +12,13 @@
 #import "YWBaseModel.h"
 #import "YWSearchNewModel.h"
 #import "YWSearchFindModel.h"
+#import "YWWebController.h"
 @interface YWSearchController ()<UITableViewDelegate,UITableViewDataSource,YWSearchCellDelegate>
 {
     YWSearchTitleModel *newModel;
     YWSearchTitleModel *findModel;
     NSString *searchCount;
-    //注视 测试 ---2
+    NSMutableArray *fencis;
 }
 PROPERTY_STRONG UITableView *mtableView;
 PROPERTY_STRONG NSMutableArray *list;
@@ -27,6 +28,7 @@ PROPERTY_STRONG NSMutableArray *list;
 
 - (void)viewDidLoad {
     self.title=@"搜索结果";
+    fencis=[[NSMutableArray alloc]init];
     self.list=[[NSMutableArray alloc]init];
     _mtableView=[[UITableView alloc]init];
     _mtableView.backgroundColor=[UIColor clearColor];
@@ -64,8 +66,10 @@ PROPERTY_STRONG NSMutableArray *list;
 {
     [newModel.list removeAllObjects];
     [findModel.list removeAllObjects];
+    [fencis removeAllObjects];
     [self loadOther];
     [self loadFind];
+    [self loadFenCi];
 }
 -(void)loadMore
 {
@@ -138,6 +142,14 @@ PROPERTY_STRONG NSMutableArray *list;
     [findModel.list addObject:model];
     [self changeDataList];
 }
+-(void)changeDataWithFenci:(NSArray *)resposel
+{
+    if (resposel.count) {
+        [fencis addObjectsFromArray:resposel];
+        [self.mtableView reloadData];
+    }
+    
+}
 -(void)loadOther
 {
     YWWeak(self,weakSelf);
@@ -156,6 +168,18 @@ PROPERTY_STRONG NSMutableArray *list;
             [weakSelf changeDataWithFine:responseDic];
         }
 //        [weakSelf.view hidenAction];
+    }];
+}
+-(void)loadFenCi
+{
+    YWWeak(self, weakself);
+    [[YWSubHttp share]loadFenCi:self.keyWorld CompletionHandle:^(id responseDic) {
+        if ([responseDic isKindOfClass:[NSDictionary class]]) {
+            NSArray *fenciddd=[responseDic objectForKey:@"data"];
+            if (fenciddd&&[fenciddd isKindOfClass:[NSArray class]]) {
+                [weakself changeDataWithFenci:fenciddd];
+            }
+        }
     }];
 }
 -(YWSearchTitleModel *)lastTitlModel
@@ -227,6 +251,12 @@ PROPERTY_STRONG NSMutableArray *list;
         [weakSelf endReFreshing];
     }];
 }
+-(void)loadWebUrl:(NSString *)url title:(NSString *)title
+{
+    YWWebController *webController=[[YWWebController alloc]init];
+    webController.urlString=url;
+    [self.navigationController pushViewController:webController animated:YES];
+}
 -(void)endReFreshing
 {
     [self.mtableView headerEndRefreshing];
@@ -252,7 +282,7 @@ PROPERTY_STRONG NSMutableArray *list;
 {
     YWSearchTitleModel *Model=[self titleModelWithIndex:section];
     if (Model.title.length==0) {
-        return nil;
+        return [[UIView alloc]init];
     }
     UIView *view=[[UIView alloc]init];
     view.backgroundColor=UIColorFromRGB(243, 243, 243);
@@ -282,13 +312,21 @@ PROPERTY_STRONG NSMutableArray *list;
         cell.delegate=self;
     }
 
-    [cell resetValue:[self modelVithIndex:[self titleModelWithIndex:indexPath.section] index:indexPath.row] key:self.keyWorld];
+    [cell resetValue:[self modelVithIndex:[self titleModelWithIndex:indexPath.section] index:indexPath.row] key:self.keyWorld fenci:fencis] ;
     return cell;
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    YWBaseModel*model= [self modelVithIndex:[self titleModelWithIndex:indexPath.section] index:indexPath.row];
+    if ([model isKindOfClass:[YWSearchModel class]]) {
+        YWSearchModel *searchModel=(YWSearchModel *)model;
+        [self loadWebUrl:searchModel.url title:nil];
+    }
+    if ([model isMemberOfClass:[YWSearchNewModel class]]) {
+        YWSearchNewModel *nModel=(YWSearchNewModel *)model;
+        [self loadWebUrl:nModel.link title:nil];
+    }
 }
 -(void)YWSearchCellFindClickIndex:(NSInteger)index cell:(YWSearchCell *)cell
 {

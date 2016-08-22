@@ -140,6 +140,24 @@ PROPERTY_STRONG NSString *baseURL;
         }];
     }
     [request startAsynchronous];
+}
+-(void)loadFenCi:(NSString *)wd CompletionHandle:(void (^)(id responseDic))completionHandle
+{
+
+    NSString* tokenUrl = [NSString stringWithFormat:@"/wap/s/fcapi.php"];
+    __weak MSHttpRequest* request = [self requestMethod:tokenUrl
+                                   paramWithKeyAndValue:@"token", @"weiabcdyou",@"wd",wd,
+                                     nil];
+    
+    if (completionHandle) {
+        [request setCompletionBlock:^{
+            completionHandle([self dicValue:request.responseData] );
+        }];
+        [request setFailedBlock:^{
+            completionHandle([self dicValue:request.responseData] );
+        }];
+    }
+    [request startAsynchronous];
 
 }
 @end

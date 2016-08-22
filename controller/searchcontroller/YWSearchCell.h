@@ -15,6 +15,6 @@
 @end
 @interface YWSearchCell : UITableViewCell
 PROPERTY_WEAK id<YWSearchCellDelegate>delegate;
--(void)resetValue:(YWBaseModel *)model key:(NSString *)key;
+-(void)resetValue:(YWBaseModel *)model key:(NSString *)key fenci:(NSMutableArray *)listfenci;
 +(float)heightWithModel:(YWBaseModel *)model;
 @end

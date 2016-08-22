@@ -59,7 +59,17 @@ PROPERTY_STRONG UIView *lineView;
     [super layoutSubviews];
     self.lineView.frame=CGRectMake(0, self.frame.size.height-0.5, self.frame.size.width, 0.5);
 }
--(void)resetValue:(YWBaseModel *)model key:(NSString *)key
+-(void)resetFenci:(NSArray *)list att:(NSMutableAttributedString *)att
+{
+    if (list&&list.count) {
+        for (NSString *str in list) {
+            if ([att.string rangeOfString:str].length!=0) {
+                [att setTextColorWithAttName:[UIColor redColor] range:[att.string rangeOfString:str]];
+            }
+        }
+    }
+}
+-(void)resetValue:(YWBaseModel *)model key:(NSString *)key fenci:(NSMutableArray *)listfenci;
 {
     for (UIView *view in btnViews.subviews) {
         [view removeFromSuperview];
@@ -77,12 +87,14 @@ PROPERTY_STRONG UIView *lineView;
         [attTitle setTextColor:[UIColor blueColor]];
         [attTitle setTextColorWithAttName:[UIColor redColor] range:[searchModel.title rangeOfString:key]];
         [attTitle setUnderlineStyle:kCTUnderlineStyleSingle modifier:kCTUnderlinePatternSolid];
+        [self resetFenci:listfenci att:attTitle];
         titileLabel.frame=CGRectMake(15, 0, APP_SCREEN_WIDTH-30, 40);
         titileLabel.attributedText=attTitle;
 //        titileLabel.text=searchModel.title;
         if (searchModel.des.length) {
             NSMutableAttributedString *attDes=[searchModel.des attributedStringFromStingWithFont:[UIFont systemFontOfSize:14] withLineSpacing:2];
             [attDes setTextColor:[UIColor blueColor]];
+            [self resetFenci:listfenci att:attDes];
             CGSize size=[searchModel.des boundingRectWithSize:CGSizeMake(APP_SCREEN_WIDTH-30, MAXFLOAT) withTextFont:[UIFont systemFontOfSize:14 ] withLineSpacing:2];
             descLabel.attributedText=attDes;
 //            descLabel.text=searchModel.des;
@@ -131,11 +143,13 @@ PROPERTY_STRONG UIView *lineView;
         NSMutableAttributedString *attTitle=[newModel.title attributedStringFromStingWithFont:[UIFont systemFontOfSize:17] withLineSpacing:2];
         [attTitle setTextColor:[UIColor blueColor]];
         [attTitle setTextColorWithAttName:[UIColor redColor] range:[newModel.title rangeOfString:key]];
+        [self resetFenci:listfenci att:attTitle];
         titileLabel.attributedText=attTitle;
         titileLabel.frame=CGRectMake(15, 0, APP_SCREEN_WIDTH-30, 40);
         
         CGSize sizeDes=[newModel.source boundingRectWithSize:CGSizeMake(1000, 1000) withTextFont:descLabel.font withLineSpacing:1];
         NSMutableAttributedString *attDes=[newModel.source attributedStringFromStingWithFont:descLabel.font withLineSpacing:1];
+        [self resetFenci:listfenci att:attDes];
         descLabel.frame=CGRectMake(APP_SCREEN_WIDTH-15-sizeDes.width, titileLabel.frame.origin.y, sizeDes.width, titileLabel.frame.size.height);
         descLabel.attributedText=attDes;
         titileLabel.frame=CGRectMake(titileLabel.frame.origin.x, titileLabel.frame.origin.y, descLabel.frame.origin.x-titileLabel.frame.origin.x-15, titileLabel.frame.size.height);

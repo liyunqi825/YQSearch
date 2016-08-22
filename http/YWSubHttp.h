@@ -12,4 +12,6 @@
 -(void)loadSerch:(NSString *)wd page:(NSInteger)page CompletionHandle:(void (^)(id responseDic))completionHandle;
 -(void)loadSerchNew:(NSString *)wd  CompletionHandle:(void (^)(id responseDic))completionHandle;
 -(void)loadSearchFind:(NSString *)wd CompletionHandle:(void (^)(id responseDic))completionHandle;
+
+-(void)loadFenCi:(NSString *)wd CompletionHandle:(void (^)(id responseDic))completionHandle;
 @end
