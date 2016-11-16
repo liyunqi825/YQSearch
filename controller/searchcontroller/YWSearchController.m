@@ -21,6 +21,7 @@
     NSMutableArray *fencis;
     //ddd
     //cccc
+    //kk
 }
 PROPERTY_STRONG UITableView *mtableView;
 PROPERTY_STRONG NSMutableArray *list;
