@@ -20,6 +20,7 @@
     NSString *searchCount;
     NSMutableArray *fencis;
     //ddd
+    //cccc
 }
 PROPERTY_STRONG UITableView *mtableView;
 PROPERTY_STRONG NSMutableArray *list;
